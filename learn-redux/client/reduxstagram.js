@@ -11,16 +11,20 @@ import Single from './components/single';
 import PhotoGrid from './components/photo-grid';
 
 // import react router deps
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
+import { Provider } from 'react-redux';
+import store, { history } from './store';
 
 // use parantheses as we want to render a load of JSX
 const router = (
-    <Router history={browserHistory}>
-        <Route path="/" component={Main}>
-            <IndexRoute component={PhotoGrid}></IndexRoute>
-            <Route path="/view/:postId" component={Single}></Route>
-        </Route>
-    </Router>
+    <Provider store={store}>
+        <Router history={history}>
+            <Route path="/" component={Main}>
+                <IndexRoute component={PhotoGrid}></IndexRoute>
+                <Route path="/view/:postId" component={Single}></Route>
+            </Route>
+        </Router>
+    </Provider>
 )
 
 render(router, document.getElementById('root'));
